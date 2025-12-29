@@ -7,9 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/jackc/pgx/v5/pgxpool"
-
 	sqlc "github.com/JoelChinoP/timetable_bck/internal/db/sqlc"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 var (

@@ -39,7 +39,10 @@ INSERT INTO academic_hours (hour_number, start_time, end_time) VALUES
 CREATE TABLE teachers (
   id         SERIAL PRIMARY KEY,
   name       VARCHAR(100) NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT NOW()
+  last_name  VARCHAR(100) NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+
+  CONSTRAINT unique_teacher_name_last_name UNIQUE (name, last_name)
 );
 
 -- ============================================

@@ -148,5 +148,6 @@ type Schedule struct {
 type Teacher struct {
 	ID        int32
 	Name      string
+	LastName  string
 	CreatedAt pgtype.Timestamptz
 }

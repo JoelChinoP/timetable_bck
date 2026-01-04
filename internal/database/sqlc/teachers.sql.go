@@ -11,16 +11,27 @@ import (
 
 const createTeacher = `-- name: CreateTeacher :one
 INSERT INTO teachers (
-  name
+  name,
+  last_name
 ) VALUES (
-  $1
-) RETURNING id, name, created_at
+  $1, $2
+) RETURNING id, name, last_name, created_at
 `
 
-func (q *Queries) CreateTeacher(ctx context.Context, name string) (Teacher, error) {
-	row := q.db.QueryRow(ctx, createTeacher, name)
+type CreateTeacherParams struct {
+	Name     string
+	LastName string
+}
+
+func (q *Queries) CreateTeacher(ctx context.Context, arg CreateTeacherParams) (Teacher, error) {
+	row := q.db.QueryRow(ctx, createTeacher, arg.Name, arg.LastName)
 	var i Teacher
-	err := row.Scan(&i.ID, &i.Name, &i.CreatedAt)
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.LastName,
+		&i.CreatedAt,
+	)
 	return i, err
 }
 
@@ -35,19 +46,24 @@ func (q *Queries) DeleteTeacher(ctx context.Context, id int32) error {
 }
 
 const getTeacher = `-- name: GetTeacher :one
-SELECT id, name, created_at FROM teachers
+SELECT id, name, last_name, created_at FROM teachers
 WHERE id = $1 LIMIT 1
 `
 
 func (q *Queries) GetTeacher(ctx context.Context, id int32) (Teacher, error) {
 	row := q.db.QueryRow(ctx, getTeacher, id)
 	var i Teacher
-	err := row.Scan(&i.ID, &i.Name, &i.CreatedAt)
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.LastName,
+		&i.CreatedAt,
+	)
 	return i, err
 }
 
 const listTeachers = `-- name: ListTeachers :many
-SELECT id, name, created_at FROM teachers
+SELECT id, name, last_name, created_at FROM teachers
 ORDER BY name
 `
 
@@ -60,7 +76,12 @@ func (q *Queries) ListTeachers(ctx context.Context) ([]Teacher, error) {
 	var items []Teacher
 	for rows.Next() {
 		var i Teacher
-		if err := rows.Scan(&i.ID, &i.Name, &i.CreatedAt); err != nil {
+		if err := rows.Scan(
+			&i.ID,
+			&i.Name,
+			&i.LastName,
+			&i.CreatedAt,
+		); err != nil {
 			return nil, err
 		}
 		items = append(items, i)
@@ -73,19 +94,26 @@ func (q *Queries) ListTeachers(ctx context.Context) ([]Teacher, error) {
 
 const updateTeacher = `-- name: UpdateTeacher :one
 UPDATE teachers
-  set name = $2
+SET name = $2,
+    last_name = $3
 WHERE id = $1
-RETURNING id, name, created_at
+RETURNING id, name, last_name, created_at
 `
 
 type UpdateTeacherParams struct {
-	ID   int32
-	Name string
+	ID       int32
+	Name     string
+	LastName string
 }
 
 func (q *Queries) UpdateTeacher(ctx context.Context, arg UpdateTeacherParams) (Teacher, error) {
-	row := q.db.QueryRow(ctx, updateTeacher, arg.ID, arg.Name)
+	row := q.db.QueryRow(ctx, updateTeacher, arg.ID, arg.Name, arg.LastName)
 	var i Teacher
-	err := row.Scan(&i.ID, &i.Name, &i.CreatedAt)
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.LastName,
+		&i.CreatedAt,
+	)
 	return i, err
 }

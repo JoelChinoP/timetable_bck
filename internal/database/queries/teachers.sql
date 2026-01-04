@@ -8,14 +8,16 @@ ORDER BY name;
 
 -- name: CreateTeacher :one
 INSERT INTO teachers (
-  name
+  name,
+  last_name
 ) VALUES (
-  $1
+  $1, $2
 ) RETURNING *;
 
 -- name: UpdateTeacher :one
 UPDATE teachers
-  set name = $2
+SET name = $2,
+    last_name = $3
 WHERE id = $1
 RETURNING *;
 

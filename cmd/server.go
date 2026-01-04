@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
-	"github.com/JoelChinoP/timetable_bck/internal/api"
-	/* 	"github.com/JoelChinoP/timetable_bck/internal/database"
-	 */"github.com/JoelChinoP/timetable_bck/pkg"
+	"github.com/JoelChinoP/timetable_bck/internal/http"
+	/* 	"github.com/JoelChinoP/timetable_bck/internal/database"*/
+	"github.com/JoelChinoP/timetable_bck/pkg"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -33,7 +33,7 @@ func main() {
 	pkg.SetupLogging(app, cfg.Env)      // Configura el middleware de registro para registrar las solicitudes y respuestas
 
 	// Configurar rutas
-	api.SetupRoutes(app) // Configura las rutas de la API
+	http.SetupRoutes(app) // Configura las rutas de la API
 
 	// Iniciar servidor
 	addr := ":" + cfg.Port

@@ -4,11 +4,14 @@ schema:
 
 # Where should the generated server code go?
 exec:
-  package: graph
-  layout: single-file # Only other option is "follow-schema," ie multi-file.
+  filename: graph/generated/generated.go
+  package: generated
+
+  # package: graph
+  # layout: single-file # Only other option is "follow-schema," ie multi-file.
 
   # Only for single-file layout:
-  filename: graph/generated.go
+  # filename: graph/generated.go
 
   # Only for follow-schema layout:
   # dir: graph
@@ -35,15 +38,25 @@ model:
 
 # Where should the resolver implementations go?
 resolver:
+  dir: graph
   package: graph
   layout: follow-schema # Only other option is "single-file."
+
+# Mapping de scalars personalizados a tipos Go
+models:
+  Time:
+    model:
+      - github.com/JoelChinoP/horarios-api/graph/scalars.Time
+  DateTime:
+    model:
+      - time.Time
 
   # Only for single-file layout:
   # filename: graph/resolver.go
 
   # Only for follow-schema layout:
-  dir: graph
-  filename_template: "{name}.resolvers.go"
+  # dir: graph
+  # filename_template: '{name}.resolvers.go'
 
   # Optional: turn on to not generate template comments above resolvers
   # omit_template_comment: false
@@ -51,7 +64,6 @@ resolver:
   # resolver_template: [your/path/resolver.gotpl]
   # Optional: turn on to avoid rewriting existing resolver(s) when generating
   # preserve_resolver: false
-
 # Optional: turn on use ` + "`" + `gqlgen:"fieldName"` + "`" + ` tags in your models
 # struct_tag: json
 
@@ -100,7 +112,7 @@ resolver:
 #
 # This enables argumment directives to not just mutate
 # argument values but to set them even if they're null.
-call_argument_directives_with_null: true
+# call_argument_directives_with_null: true
 
 # This enables gql server to use function syntax for execution context
 # instead of generating receiver methods of the execution context.
@@ -120,7 +132,7 @@ call_argument_directives_with_null: true
 
 # gqlgen will search for any type names in the schema in these go packages
 # if they match it will use them, otherwise it will generate them.
-autobind:
+# autobind:
 #  - "github.com/JoelChinoP/timetable_bck/graph/model"
 
 # This section declares type mapping between the GraphQL and go type systems
@@ -128,32 +140,32 @@ autobind:
 # The first line in each type will be used as defaults for resolver arguments and
 # modelgen, the others will be allowed when binding to fields. Configure them to
 # your liking
-models:
-  ID:
-    model:
-      - github.com/99designs/gqlgen/graphql.ID
-      - github.com/99designs/gqlgen/graphql.Int
-      - github.com/99designs/gqlgen/graphql.Int64
-      - github.com/99designs/gqlgen/graphql.Int32
-  # gqlgen provides a default GraphQL UUID convenience wrapper for github.com/google/uuid 
-  # but you can override this to provide your own GraphQL UUID implementation
-  UUID:
-    model:
-      - github.com/99designs/gqlgen/graphql.UUID
+# models:
+#  ID:
+#    model:
+#      - github.com/99designs/gqlgen/graphql.ID
+#      - github.com/99designs/gqlgen/graphql.Int
+#      - github.com/99designs/gqlgen/graphql.Int64
+#      - github.com/99designs/gqlgen/graphql.Int32
+# gqlgen provides a default GraphQL UUID convenience wrapper for github.com/google/uuid
+# but you can override this to provide your own GraphQL UUID implementation
+#  UUID:
+#    model:
+#      - github.com/99designs/gqlgen/graphql.UUID
 
-  # The GraphQL spec explicitly states that the Int type is a signed 32-bit
-  # integer. Using Go int or int64 to represent it can lead to unexpected
-  # behavior, and some GraphQL tools like Apollo Router will fail when
-  # communicating numbers that overflow 32-bits.
-  #
-  # You may choose to use the custom, built-in Int64 scalar to represent 64-bit
-  # integers, or ignore the spec and bind Int to graphql.Int / graphql.Int64
-  # (the default behavior of gqlgen). This is fine in simple use cases when you
-  # do not need to worry about interoperability and only expect small numbers.
-  Int:
-    model:
-      - github.com/99designs/gqlgen/graphql.Int32
-  Int64:
-    model:
-      - github.com/99designs/gqlgen/graphql.Int
-      - github.com/99designs/gqlgen/graphql.Int64
+# The GraphQL spec explicitly states that the Int type is a signed 32-bit
+# integer. Using Go int or int64 to represent it can lead to unexpected
+# behavior, and some GraphQL tools like Apollo Router will fail when
+# communicating numbers that overflow 32-bits.
+#
+# You may choose to use the custom, built-in Int64 scalar to represent 64-bit
+# integers, or ignore the spec and bind Int to graphql.Int / graphql.Int64
+# (the default behavior of gqlgen). This is fine in simple use cases when you
+# do not need to worry about interoperability and only expect small numbers.
+# Int:
+#  model:
+#    - github.com/99designs/gqlgen/graphql.Int32
+# Int64:
+#  model:
+#    - github.com/99designs/gqlgen/graphql.Int
+#    - github.com/99designs/gqlgen/graphql.Int64

@@ -73,12 +73,12 @@ CREATE TABLE courses (
 
   CONSTRAINT unique_course_name_abbreviation UNIQUE (name, abbreviation),
   CONSTRAINT valid_academic_year CHECK (academic_year > 0 AND academic_year <= 5),
-  CONSTRAINT valid_laboratory_course CHECK (|
-    (mode = 'LABORATORY' AND id_course_theory IS NOT NULL) OR
-    (mode = 'THEORY' AND id_course_theory IS NULL)
+  CONSTRAINT valid_type_course CHECK (
+    (type = 'LABORATORY' AND id_course_theory IS NOT NULL) OR
+    (type = 'THEORY' AND id_course_theory IS NULL)
   ),
   CONSTRAINT fk_course_teacher FOREIGN KEY (id_teacher) REFERENCES teachers(id) ON DELETE SET NULL,
-  CONSTRAINT fk_course_laboratory FOREIGN KEY (id_course_laboratory) REFERENCES courses(id) ON DELETE SET NULL
+  CONSTRAINT fk_course_theory FOREIGN KEY (id_course_theory) REFERENCES courses(id) ON DELETE SET NULL
 );
 
 -- ============================================
@@ -87,12 +87,14 @@ CREATE TABLE courses (
 CREATE TABLE groups (
   id         SERIAL PRIMARY KEY,
   code       VARCHAR(24) NOT NULL UNIQUE, -- NANO ID
-  id_course  INTEGER NOT NULL,
   name       VARCHAR(10) NOT NULL,
+  id_course  INTEGER NOT NULL,
+  id_classroom INTEGER,
   created_at TIMESTAMPTZ DEFAULT NOW(),
 
   CONSTRAINT unique_group_per_course UNIQUE(id_course, name),
-  CONSTRAINT fk_group_course FOREIGN KEY (id_course) REFERENCES courses(id) ON DELETE CASCADE
+  CONSTRAINT fk_group_course FOREIGN KEY (id_course) REFERENCES courses(id) ON DELETE CASCADE,
+  CONSTRAINT fk_group_classroom FOREIGN KEY (id_classroom) REFERENCES classrooms(id) ON DELETE SET NULL
 );
 
 -- ============================================
@@ -104,12 +106,13 @@ CREATE TABLE schedule (
   day                 week_day NOT NULL,
   start_hour_academic SMALLINT NOT NULL,
   duration_hours      SMALLINT NOT NULL,
-  id_classroom        INTEGER, --opcional solo en caso de asignación fija
+/*   id_classroom        INTEGER, --opcional solo en caso de asignación fija */
   created_at          TIMESTAMPTZ DEFAULT NOW(),
 
   CONSTRAINT valid_duration CHECK (duration_hours > 0 AND duration_hours <= 4),
   CONSTRAINT fk_schedule_group FOREIGN KEY (id_group) REFERENCES groups(id) ON DELETE CASCADE,
-  CONSTRAINT fk_schedule_classroom FOREIGN KEY (id_classroom) REFERENCES classrooms(id) ON DELETE SET NULL
+/*   CONSTRAINT fk_schedule_classroom FOREIGN KEY (id_classroom) REFERENCES classrooms(id) ON DELETE SET NULL, */
+  CONSTRAINT fk_schedule_start_hour FOREIGN KEY (start_hour_academic) REFERENCES academic_hours(hour_number) ON DELETE CASCADE
 );
 
 -- Índices

@@ -12,14 +12,149 @@ import (
 	"github.com/JoelChinoP/timetable_bck/graph/model"
 )
 
-// CreateTodo is the resolver for the createTodo field.
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: CreateTodo - createTodo"))
+ // CreateTeacher is the resolver for the createTeacher field.
+func (r *mutationResolver) CreateTeacher(ctx context.Context, input model.CreateTeacherInput) (*model.Teacher, error) {
+	panic(fmt.Errorf("not implemented: CreateTeacher - createTeacher"))
 }
 
-// Todos is the resolver for the todos field.
-func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: Todos - todos"))
+// UpdateTeacher is the resolver for the updateTeacher field.
+func (r *mutationResolver) UpdateTeacher(ctx context.Context, id string, input model.UpdateTeacherInput) (*model.Teacher, error) {
+	panic(fmt.Errorf("not implemented: UpdateTeacher - updateTeacher"))
+}
+
+// DeleteTeacher is the resolver for the deleteTeacher field.
+func (r *mutationResolver) DeleteTeacher(ctx context.Context, id string) (bool, error) {
+	panic(fmt.Errorf("not implemented: DeleteTeacher - deleteTeacher"))
+}
+
+// CreateClassroom is the resolver for the createClassroom field.
+func (r *mutationResolver) CreateClassroom(ctx context.Context, input model.CreateClassroomInput) (*model.Classroom, error) {
+	panic(fmt.Errorf("not implemented: CreateClassroom - createClassroom"))
+}
+
+// UpdateClassroom is the resolver for the updateClassroom field.
+func (r *mutationResolver) UpdateClassroom(ctx context.Context, id string, input model.UpdateClassroomInput) (*model.Classroom, error) {
+	panic(fmt.Errorf("not implemented: UpdateClassroom - updateClassroom"))
+}
+
+// DeleteClassroom is the resolver for the deleteClassroom field.
+func (r *mutationResolver) DeleteClassroom(ctx context.Context, id string) (bool, error) {
+	panic(fmt.Errorf("not implemented: DeleteClassroom - deleteClassroom"))
+}
+
+// CreateCourse is the resolver for the createCourse field.
+func (r *mutationResolver) CreateCourse(ctx context.Context, input model.CreateCourseInput) (*model.Course, error) {
+	panic(fmt.Errorf("not implemented: CreateCourse - createCourse"))
+}
+
+// UpdateCourse is the resolver for the updateCourse field.
+func (r *mutationResolver) UpdateCourse(ctx context.Context, id string, input model.UpdateCourseInput) (*model.Course, error) {
+	panic(fmt.Errorf("not implemented: UpdateCourse - updateCourse"))
+}
+
+// DeleteCourse is the resolver for the deleteCourse field.
+func (r *mutationResolver) DeleteCourse(ctx context.Context, id string) (bool, error) {
+	panic(fmt.Errorf("not implemented: DeleteCourse - deleteCourse"))
+}
+
+// CreateGroup is the resolver for the createGroup field.
+func (r *mutationResolver) CreateGroup(ctx context.Context, input model.CreateGroupInput) (*model.Group, error) {
+	panic(fmt.Errorf("not implemented: CreateGroup - createGroup"))
+}
+
+// UpdateGroup is the resolver for the updateGroup field.
+func (r *mutationResolver) UpdateGroup(ctx context.Context, id string, input model.UpdateGroupInput) (*model.Group, error) {
+	panic(fmt.Errorf("not implemented: UpdateGroup - updateGroup"))
+}
+
+// DeleteGroup is the resolver for the deleteGroup field.
+func (r *mutationResolver) DeleteGroup(ctx context.Context, id string) (bool, error) {
+	panic(fmt.Errorf("not implemented: DeleteGroup - deleteGroup"))
+}
+
+// CreateSchedule is the resolver for the createSchedule field.
+func (r *mutationResolver) CreateSchedule(ctx context.Context, input model.CreateScheduleInput) (*model.Schedule, error) {
+	panic(fmt.Errorf("not implemented: CreateSchedule - createSchedule"))
+}
+
+// UpdateSchedule is the resolver for the updateSchedule field.
+func (r *mutationResolver) UpdateSchedule(ctx context.Context, id string, input model.UpdateScheduleInput) (*model.Schedule, error) {
+	panic(fmt.Errorf("not implemented: UpdateSchedule - updateSchedule"))
+}
+
+// DeleteSchedule is the resolver for the deleteSchedule field.
+func (r *mutationResolver) DeleteSchedule(ctx context.Context, id string) (bool, error) {
+	panic(fmt.Errorf("not implemented: DeleteSchedule - deleteSchedule"))
+}
+
+// AcademicHours is the resolver for the academicHours field.
+func (r *queryResolver) AcademicHours(ctx context.Context) ([]*model.AcademicHour, error) {
+	panic(fmt.Errorf("not implemented: AcademicHours - academicHours"))
+}
+
+// AcademicHour is the resolver for the academicHour field.
+func (r *queryResolver) AcademicHour(ctx context.Context, hourNumber int32) (*model.AcademicHour, error) {
+	panic(fmt.Errorf("not implemented: AcademicHour - academicHour"))
+}
+
+// Teachers is the resolver for the teachers field.
+func (r *queryResolver) Teachers(ctx context.Context) ([]*model.Teacher, error) {
+	panic(fmt.Errorf("not implemented: Teachers - teachers"))
+}
+
+// Teacher is the resolver for the teacher field.
+func (r *queryResolver) Teacher(ctx context.Context, id string) (*model.Teacher, error) {
+	panic(fmt.Errorf("not implemented: Teacher - teacher"))
+}
+
+// Classrooms is the resolver for the classrooms field.
+func (r *queryResolver) Classrooms(ctx context.Context, typeArg *model.ModeType) ([]*model.Classroom, error) {
+	panic(fmt.Errorf("not implemented: Classrooms - classrooms"))
+}
+
+// Classroom is the resolver for the classroom field.
+func (r *queryResolver) Classroom(ctx context.Context, id string) (*model.Classroom, error) {
+	panic(fmt.Errorf("not implemented: Classroom - classroom"))
+}
+
+// Courses is the resolver for the courses field.
+func (r *queryResolver) Courses(ctx context.Context, filter *model.CourseFilter) ([]*model.Course, error) {
+	panic(fmt.Errorf("not implemented: Courses - courses"))
+}
+
+// Course is the resolver for the course field.
+func (r *queryResolver) Course(ctx context.Context, id string) (*model.Course, error) {
+	panic(fmt.Errorf("not implemented: Course - course"))
+}
+
+// CourseByCode is the resolver for the courseByCode field.
+func (r *queryResolver) CourseByCode(ctx context.Context, code string) (*model.Course, error) {
+	panic(fmt.Errorf("not implemented: CourseByCode - courseByCode"))
+}
+
+// Groups is the resolver for the groups field.
+func (r *queryResolver) Groups(ctx context.Context, filter *model.GroupFilter) ([]*model.Group, error) {
+	panic(fmt.Errorf("not implemented: Groups - groups"))
+}
+
+// Group is the resolver for the group field.
+func (r *queryResolver) Group(ctx context.Context, id string) (*model.Group, error) {
+	panic(fmt.Errorf("not implemented: Group - group"))
+}
+
+// GroupByCode is the resolver for the groupByCode field.
+func (r *queryResolver) GroupByCode(ctx context.Context, code string) (*model.Group, error) {
+	panic(fmt.Errorf("not implemented: GroupByCode - groupByCode"))
+}
+
+// Schedules is the resolver for the schedules field.
+func (r *queryResolver) Schedules(ctx context.Context, filter *model.ScheduleFilter) ([]*model.Schedule, error) {
+	panic(fmt.Errorf("not implemented: Schedules - schedules"))
+}
+
+// Schedule is the resolver for the schedule field.
+func (r *queryResolver) Schedule(ctx context.Context, id string) (*model.Schedule, error) {
+	panic(fmt.Errorf("not implemented: Schedule - schedule"))
 }
 
 // Mutation returns MutationResolver implementation.
@@ -30,3 +165,18 @@ func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
+
+// !!! WARNING !!!
+// The code below was going to be deleted when updating resolvers. It has been copied here so you have
+// one last chance to move it out of harms way if you want. There are two reasons this happens:
+//  - When renaming or deleting a resolver the old code will be put in here. You can safely delete
+//    it when you're done.
+//  - You have helper methods in this file. Move them out to keep these resolver files clean.
+/*
+	func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
+	panic(fmt.Errorf("not implemented: CreateTodo - createTodo"))
+}
+func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
+	panic(fmt.Errorf("not implemented: Todos - todos"))
+}
+*/
